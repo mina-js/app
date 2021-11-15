@@ -3,6 +3,10 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import styled from 'styled-components'
 
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import Box from '../components/box'
+
 const PageWrapper = styled.div`
   background: #5c1f5c;
   width: 100%;
@@ -12,7 +16,7 @@ const PageWrapper = styled.div`
   justify-content: center;
 `
 
-const WelcomeModal = styled.div`
+const TextModule = styled.div`
   background: #7d3d8f;
   padding: 100px;
   border: 5px solid #7f478f;
@@ -22,24 +26,21 @@ const WelcomeModal = styled.div`
   margin: auto;
 `
 
-const BeginButton = styled.button`
-  width: 200px;
-  height: 80px;
-  background: #8a3f57;
-`
-
 export default function Animatrix() {  
 
   return (
-    <>
-      <Head>
-        <title>Mina.js</title>
-      </Head>
-      <PageWrapper>
-        <WelcomeModal>
-          Welcome here!
-        </WelcomeModal>
-      </PageWrapper>
-    </>
+    <PageWrapper>
+      <TextModule>
+        <Canvas camera={{ position: [0, 0, 35] }}>
+          <ambientLight intensity={2} />
+          <pointLight position={[40, 40, 40]} />
+            <Box position={[10, 0, 0]} />
+            <Box position={[-10, 0, 0]} />
+            <Box position={[0, 10, 0]} />
+            <Box position={[0, -10, 0]} />
+          <OrbitControls />
+        </Canvas>
+      </TextModule>
+    </PageWrapper>
   )
 }
